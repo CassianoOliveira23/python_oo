@@ -26,39 +26,39 @@ class ContaCorrente:
         return horario_brasil.strftime('%d/%m/%Y %H:%M:%S')
     
     def __init__(self, nome, cpf, agencia, numero_conta):
-        self.nome = nome
-        self.cpf = cpf
-        self.saldo = 0
-        self.limite = None
-        self.agencia = agencia
-        self.numero_conta = numero_conta
-        self.transacoes = []
+        self._nome = nome
+        self._cpf = cpf
+        self._saldo = 0
+        self._limite = None
+        self._gencia = agencia
+        self._numero_conta = numero_conta
+        self._transacoes = []
          
          
     def consultar_saldo(self):
-        print('Seu saldo atual é de R$ {:,.2f}'.format(self.saldo))
+        print('Seu saldo atual é de R$ {:,.2f}'.format(self._saldo))
          
          
     def depositar(self, valor):
-        self.saldo += valor
-        self.transacoes.append((valor,
-                                'Salddo R$ {}'.format(self.saldo), 
+        self._saldo += valor
+        self._transacoes.append((valor,
+                                'Salddo R$ {}'.format(self._saldo), 
                                 self._data_hora()))
         
         
     def _limite_conta(self): #O underline define como um método privado
-        self.limite = -1000
-        return self.limite
+        self._limite = -1000
+        return self._limite
     
     
     def sacar(self, valor):
-        if self.saldo - valor < self._limite_conta():
+        if self._saldo - valor < self._limite_conta():
             print("Você não tem saldo suficiente para sacar este valor")
             self.consultar_saldo()
         else:
-            self.saldo -= valor
-            self.transacoes.append((-valor,
-                                    'Salddo R$ {}'.format(self.saldo), 
+            self._saldo -= valor
+            self._transacoes.append((-valor,
+                                    'Salddo R$ {}'.format(self._saldo), 
                                     self._data_hora()))
             
             
@@ -69,19 +69,18 @@ class ContaCorrente:
     def consultar_historico_transacoes(self):
         print('Histórico de Transações: ')
         print('Valor, Saldo, Data e Hora')
-        for transacao in self.transacoes:
+        for transacao in self._transacoes:
             print(transacao)
         
 
     def transferir(self, valor, conta_destino):
-        self.saldo -= valor
-        self.transacoes.append((-valor, 'Salddo R$ {}'.format(self.saldo), self._data_hora()))
+        self._saldo -= valor
+        self._transacoes.append((-valor, 'Salddo R$ {}'.format(self._saldo), self._data_hora()))
         
-        conta_destino.saldo += valor
-        conta_destino.transacoes.append((valor, 'Salddo R$ {}'.format(conta_destino.saldo), self._data_hora()))
+        conta_destino._saldo += valor
+        conta_destino._transacoes.append((valor, 'Salddo R$ {}'.format(conta_destino._saldo), self._data_hora()))
         
         
-
 
 
 #Criando a conta:
@@ -102,11 +101,10 @@ print('-'*50)
 conta_cassiano.consultar_historico_transacoes()
    
    
-   
 print('-'*50) 
 
 #criando uma nova conta:
-conta_namorada = ContaCorrente('Ketlin Wolski Goetz', '033.666.777-330', 3233, 766776)  
+conta_namorada = ContaCorrente('Ketlyn Wolski Goetz', '033.666.777-330', 3233, 766776)  
 
 conta_cassiano.transferir(666.33, conta_namorada)
 conta_cassiano.consultar_saldo()

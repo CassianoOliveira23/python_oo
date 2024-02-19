@@ -1,0 +1,37 @@
+- Tudo em python é um objeto
+
+- Objetos, na verdade, são classes em python
+
+- Cada Classe tem Métodos e Atributos
+
+
+Classe = Objeto
+
+    Dentro dos Objetos tem métodos e atributos
+
+    MÉTODOS: É o que o objeto pode fazer (ações)
+    ATRIBUTOS: São características do objeto (informações)
+
+
+Exemplo:
+    Classe Pessoa{
+        Métodos: andar, correr, Falar, aprender, pensar, etc...
+        Atributos: Peso, altura, QI, Tipo sanguíneo, cor dos olhos/cabelo
+    }
+
+    Classe Televisão{
+        Método: ligar/desligar, trocar de canal, aumentar/diminuir volume
+        Atributos: tamanho da tela, cor, se é SmartTV ou não
+    }
+
+
+
+
+Vantagens da Programação Orientada a Objetos:
+    - Aproveitar o código sem ter que reescrever;
+
+    - Encapsulamento: Proteção a mudanças indesejadas(ex: não pode desligar a tv no botão de volume);
+
+    - Herança: Instâncias do objeto tem a mesmas características, apesar de ter valores diferentes;
+
+    - Polimorfismo: mesmo método pode ter várias "formas" em diferentes classes ou sub-classes. ex: Animais->Gatos x Cachorros

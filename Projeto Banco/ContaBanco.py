@@ -1,6 +1,7 @@
 #Sempre nomear as classes assim: ContaCorrente
 #Sempre nomear os métodos assim: consultar_saldo
 
+from random import randint
 from datetime import datetime
 import pytz
 
@@ -33,6 +34,7 @@ class ContaCorrente:
         self._gencia = agencia
         self._numero_conta = numero_conta
         self._transacoes = []
+        self.cartoes = []
          
          
     def consultar_saldo(self):
@@ -81,32 +83,38 @@ class ContaCorrente:
         conta_destino._transacoes.append((valor, 'Salddo R$ {}'.format(conta_destino._saldo), self._data_hora()))
         
         
+        
+        
+        
+class CartaoCredito:
+    @staticmethod
+    def _data_hora():
+        fuso_brasil = pytz.timezone('Brazil/East')
+        horario_brasil = datetime.now(fuso_brasil)
+        return horario_brasil.strftime('%d/%m/%Y %H:%M:%S')
+    
+    def __init__(self, titular, conta_corrente):
+        self.numero = randint(1000000000000000, 9999999999999999)
+        self.nome_titular = titular
+        self.validade = CartaoCredito._data_hora()
+        self.codigo_seguranca = '{}{}{}'.format(randint(0,9), randint(0,9), randint(0,9))
+        self.limite = 1000
+        self.conta_corrente = conta_corrente
+        conta_corrente.cartoes.append(self)
+
+
 
 
 #Criando a conta:
 conta_cassiano = ContaCorrente('Cassiano', '032.610.100.45', 2304, 199423)
-conta_cassiano.consultar_saldo()
 
-#Depositando dinheiro na conta:
-conta_cassiano.depositar(10000)
-conta_cassiano.consultar_saldo()
+cartao_cassiano = CartaoCredito('Cassiano Oliveira de Borba', conta_cassiano)
 
+print(cartao_cassiano.conta_corrente._numero_conta)
 
-print('Saldo Final')
-conta_cassiano.consultar_saldo()
-conta_cassiano.consultar_limite_cheque_especial()
+print(cartao_cassiano.numero)
 
+print(cartao_cassiano.codigo_seguranca)
 
-print('-'*50)
-conta_cassiano.consultar_historico_transacoes()
-   
-   
-print('-'*50) 
+print(cartao_cassiano.validade)
 
-#criando uma nova conta:
-conta_namorada = ContaCorrente('Ketlyn Wolski Goetz', '033.666.777-330', 3233, 766776)  
-
-conta_cassiano.transferir(666.33, conta_namorada)
-conta_cassiano.consultar_saldo()
-conta_namorada.consultar_saldo()
-        

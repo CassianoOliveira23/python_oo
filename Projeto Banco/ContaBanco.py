@@ -31,8 +31,8 @@ class ContaCorrente:
         self._cpf = cpf
         self._saldo = 0
         self._limite = None
-        self._gencia = agencia
-        self._numero_conta = numero_conta
+        self.gencia = agencia
+        self.numero_conta = numero_conta
         self._transacoes = []
         self.cartoes = []
          
@@ -99,10 +99,23 @@ class CartaoCredito:
         self.validade = CartaoCredito._data_hora()
         self.codigo_seguranca = '{}{}{}'.format(randint(0,9), randint(0,9), randint(0,9))
         self.limite = 1000
+        self._senha = '123456'
         self.conta_corrente = conta_corrente
         conta_corrente.cartoes.append(self)
-
-
+      
+    #tornando a função senha um atributo (GETTER)
+    @property  
+    def senha(self):
+        return self._senha
+    
+    @senha.setter
+    def senha(self, valor):
+        if len(valor) == 6 and valor.isnumeric():
+            self._senha = valor
+        else:
+            print("Nova senha inválida")
+    
+    
 
 
 #Criando a conta:
@@ -110,11 +123,14 @@ conta_cassiano = ContaCorrente('Cassiano', '032.610.100.45', 2304, 199423)
 
 cartao_cassiano = CartaoCredito('Cassiano Oliveira de Borba', conta_cassiano)
 
-print(cartao_cassiano.conta_corrente._numero_conta)
+# SETTER
+conta_cassiano.nome = "Cassiano Kovalenko" 
 
-print(cartao_cassiano.numero)
+# GETTER
+print(conta_cassiano.nome)
 
-print(cartao_cassiano.codigo_seguranca)
 
-print(cartao_cassiano.validade)
+#getter e setter da senha:
+cartao_cassiano.senha = '231994'
+print(cartao_cassiano.senha)
 

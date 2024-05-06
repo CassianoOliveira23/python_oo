@@ -81,11 +81,7 @@ class ContaCorrente:
         
         conta_destino._saldo += valor
         conta_destino._transacoes.append((valor, 'Salddo R$ {}'.format(conta_destino._saldo), self._data_hora()))
-        
-        
-        
-        
-        
+           
 class CartaoCredito:
     @staticmethod
     def _data_hora():
@@ -117,20 +113,4 @@ class CartaoCredito:
     
     
 
-
-#Criando a conta:
-conta_cassiano = ContaCorrente('Cassiano', '032.610.100.45', 2304, 199423)
-
-cartao_cassiano = CartaoCredito('Cassiano Oliveira de Borba', conta_cassiano)
-
-# SETTER
-conta_cassiano.nome = "Cassiano Kovalenko" 
-
-# GETTER
-print(conta_cassiano.nome)
-
-
-#getter e setter da senha:
-cartao_cassiano.senha = '231994'
-print(cartao_cassiano.senha)
 
